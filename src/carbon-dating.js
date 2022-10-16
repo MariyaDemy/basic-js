@@ -17,15 +17,16 @@ const HALF_LIFE_PERIOD = 5730;
  * dateSample('WOOT!') => false
  *
  */
+
+ //t = (ln(N0 / N)) / k, where k = 0.693 / HALF_LIFE_PERIOD (5730)
+
 function dateSample(sampleActivity) {
-  if(!sampleActivity || isNaN(+sampleActivity)){
+  if(isNaN(+sampleActivity) || typeof sampleActivity !== 'string'){
     console.log('false sample')
     return false;
   } else {
-    let activity = +sampleActivity;
-    console.log(+sampleActivity, 'activity')
-    console.log((Math.log(15)-Math.log(8))/1.22)
-    //Math.ceil(result)
+    let t = (Math.log(MODERN_ACTIVITY / +sampleActivity)) / (0.693 / HALF_LIFE_PERIOD);
+    return Math.ceil(t);
   }
 }
 
